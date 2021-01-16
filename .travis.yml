@@ -21,4 +21,16 @@ after_success:
   - docker push franzbewerunge/multi-client 
   - docker push franzbewerunge/multi-nginx 
   - docker push franzbewerunge/multi-server 
-  - docker push franzbewerunge/multi-worker 
+  - docker push franzbewerunge/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-central-1
+  app: Docker-Multi
+  env: DockerMulti-env
+  bucket_name: elasticbeanstalk-eu-central-1-800142889403
+  bucket_path: docker-multi
+  on:
+    branch: master
+      access_key_id: $AWS_ACCESS_KEY
+      secret_access_key: $AWS_SECRET_KEY
